@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify Gift</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/174/174872.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:'Poppins',sans-serif;background:linear-gradient(-45deg,#ff6ec4,#7873f5,#ffa6b8,#b79aff);background-size:400% 400%;animation:gradientShift 15s ease infinite;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;text-align:center;overflow-x:hidden;position:relative}
+      @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+      /* Loading */
+      .loading-box{position:fixed;inset:0;background:#12001f;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;animation:fadeOut .5s ease 4.5s forwards}
+      .pixel-box{width:40px;height:40px;background:#ff77c0;animation:boxBounce 1.5s infinite ease-in-out;margin-bottom:18px}
+      @keyframes boxBounce{0%,100%{transform:scale(1)}50%{transform:scale(1.4);background:#9d79ff}}
+      @keyframes fadeOut{to{opacity:0;visibility:hidden}}
+
+      /* Hearts */
+      .hearts{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+      .heart{position:absolute;width:20px;height:20px;background:red;transform:rotate(-45deg);animation:float 8s linear infinite,colorShift 5s infinite alternate}
+      .heart::before,.heart::after{content:"";position:absolute;width:20px;height:20px;background:inherit;border-radius:50%}
+      .heart::before{top:-10px;left:0}.heart::after{left:10px;top:0}
+      @keyframes float{0%{transform:translateY(100vh) rotate(-45deg);opacity:1}100%{transform:translateY(-10vh) rotate(-45deg);opacity:0}}
+      @keyframes colorShift{0%{background:#ff6ec4}50%{background:#ffb6c1}100%{background:#a18cd1}}
+
+      /* Popup */
+      .popup{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);z-index:1000;animation:fadeIn .6s ease}
+      .popup-content{background:rgba(255,255,255,.15);backdrop-filter:blur(16px);padding:28px 24px;border-radius:22px;max-width:340px;box-shadow:0 0 20px rgba(255,105,180,.4);position:relative;text-align:center}
+      .popup-content p{font-size:1rem;line-height:1.6;color:#ffeef9}
+      .close-btn{position:absolute;top:10px;right:16px;font-size:1.6rem;color:#ffd6fb;cursor:pointer}
+      @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+      @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+      /* Cards */
+      .card,.message{background:rgba(255,255,255,.15);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.25);border-radius:26px;box-shadow:0 8px 30px rgba(255,255,255,.25),0 4px 14px rgba(255,105,180,.35);transition:.3s;z-index:2}
+      .card:hover,.message:hover{transform:scale(1.02);box-shadow:0 10px 40px rgba(255,255,255,.35),0 6px 20px rgba(255,105,180,.45)}
+      .card{padding:28px;max-width:440px;margin-top:26px}
+      .card h2{font-size:1.7rem;margin-bottom:14px}
+      .credentials{background:rgba(255,255,255,.12);padding:16px;border-radius:14px;font-size:.95rem;text-align:left;color:#ffe9ff}
+      .message{margin-top:60px;padding:30px;max-width:720px;font-size:1.1rem;line-height:1.85;color:#ffeef9}
+      .signature{margin-top:20px;font-style:italic;color:#ffd5ec}
+      .footer{margin-top:38px;font-size:.75rem;color:#f4bbff}
+      .title{font-size:2.6rem;font-weight:600;margin-bottom:18px;z-index:2}
+      .wait{font-size:.95rem;color:#f0bfff;margin-bottom:14px;z-index:2}
+      .link{display:inline-block;margin-top:16px;padding:14px 28px;border-radius:14px;background:linear-gradient(45deg,#ff6ec4,#7873f5);color:#fff;text-decoration:none;font-weight:bold;transition:.3s;box-shadow:0 0 20px rgba(255,105,180,.4)}
+      .link:hover{transform:scale(1.07);box-shadow:0 0 25px rgba(255,105,180,.6)}
+    </style>
+  </head>
+  <body>
+    <!-- Popup -->
+    <div class="popup" id="popup">
+      <div class="popup-content" style="animation:fadeInUp .6s ease">
+        <span class="close-btn" onclick="document.getElementById('popup').style.display='none'">&times;</span>
+        <p>Happy birthday bandbuddhi! Mujhe pata hai ki ye jo tu abhi kholegi-sunegi vo tere type ka nhi hai & probably tere vibe check bhi nhi hoga par trust me LYRICS say a lot rather than vibes. enjoy:)</p>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-box">
+      <div class="pixel-box"></div>
+      <div style="color:white;font-size:1.2rem;">Loading your surprise...</div>
+    </div>
+
+    <!-- Hearts -->
+    <div class="hearts"></div>
+
+    <!-- Main Content -->
+    <div class="title">For the one who made life a playlist worth living</div>
+    <div class="wait">Give it a sec...</div>
+
+    <div class="card">
+      <h2>Your Spotify Login 🎧</h2>
+      <div class="credentials">
+        <p><strong>Email:</strong> howitsdone999@gmail.com</p>
+        <p><strong>Password:</strong> Itsagiftbro</p>
+      </div>
+      <a href="https://open.spotify.com/playlist/2UDbSGRu7j9XOQOtrvdPIg?si=a46ca1d2c11441a1" target="_blank" class="link">Open Your Playlist 💖</a>
+    </div>
+
+    <div class="message">
+      Every track in the playlist means something, just like every moment with you means the world to me. I’m not good with words, but music helps me say what I feel. You always have been that one constant, that one warmth. You’ve shaped parts of me. This isn’t just a gift, it’s my way of saying thank you for staying and for caring.
+      <br/><br/>
+      And just for the record — your nature is rare. You’re gentle in a loud world, thoughtful when no one’s watching, and the kind of soul people spend lifetimes searching for. You make broken things feel whole and ordinary moments feel unforgettable. You’re someone the universe doesn’t make twice.
+      <div class="signature">lovingly,<br/>— Pranav, 999</div>
+    </div>
+
+    <div class="footer">Auto-renewed monthly. Because you deserve music that never stops.</div>
+
+    <script>
+      // Hearts creation
+      const heartContainer=document.querySelector('.hearts');
+      for(let i=0;i<40;i++){
+        const h=document.createElement('div');
+        h.className='heart';
+        h.style.left=Math.random()*100+'vw';
+        h.style.animationDelay=Math.random()*6+'s';
+        heartContainer.appendChild(h);
+      }
+    </script>
+<!-- ── Background music iframe ── -->
+<iframe
+  id="bgMusic"
+  width="0"
+  height="0"
+  style="display:none"
+  allow="autoplay"
+  src="https://www.youtube.com/embed/LV_wiOhO40Q?enablejsapi=1&autoplay=1&loop=1&playlist=LV_wiOhO40Q&controls=0">
+</iframe>
+
+<script>
+  window.addEventListener('load', () => {
+    const yt = document.getElementById('bgMusic').contentWindow;
+    setTimeout(() => {
+      yt.postMessage('{"event":"command","func":"setVolume","args":[50]}', '*');
+      yt.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+    }, 1000);
+  });
+</script>
+<!-- ── Toast Popup ── -->
+<div id="toast">Now playing in the background 🎶</div>
+</body>
+</html>
